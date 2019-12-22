@@ -13,6 +13,7 @@
     <Compile Include="CommandLine.fsi" />
     <Compile Include="CommandLine.fs" />
     <Compile Include="Program.fs" />
+	<None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FSharp.ProjectTemplate\FSharp.ProjectTemplate.fsproj"></ProjectReference>
