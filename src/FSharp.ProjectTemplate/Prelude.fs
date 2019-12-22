@@ -33,86 +33,86 @@ let inline internal tryWith f x = f x |> toOption
 let argDefault x y =
     defaultArg y x
 
-type Boolean with
-    static member TryParse x =
-        tryWith bool.TryParse x
+//type Boolean with
+//    static member TryParse (x : string) =
+//        tryWith bool.TryParse x
 
 type Byte with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Byte.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Byte.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        Byte.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type SByte with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         SByte.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        SByte.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        SByte.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type UInt16 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         UInt16.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        UInt16.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        UInt16.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type Int16 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Int16.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Int16.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        Int16.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type UInt32 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         UInt32.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        UInt32.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        UInt32.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type Int32 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Int32.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Int32.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        Int32.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type UInt64 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         UInt64.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        UInt64.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        UInt64.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type Int64 with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Int64.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Int64.TryParseWithOptions NumberStyles.Integer CultureInfo.InvariantCulture x
+        Int64.TryParseWithOptions (NumberStyles.Integer, CultureInfo.InvariantCulture, x)
 
 type Decimal with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Decimal.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Decimal.TryParseWithOptions NumberStyles.Currency CultureInfo.InvariantCulture x
+        Decimal.TryParseWithOptions (NumberStyles.Currency, CultureInfo.InvariantCulture, x)
 
 type Single with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Single.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Single.TryParseWithOptions NumberStyles.Float CultureInfo.InvariantCulture x
+        Single.TryParseWithOptions (NumberStyles.Float, CultureInfo.InvariantCulture, x)
 
 type Double with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         Double.TryParse(x, style, provider) |> toOption
 
     static member TryParse x =
-        Double.TryParseWithOptions NumberStyles.Float CultureInfo.InvariantCulture x
+        Double.TryParseWithOptions (NumberStyles.Float, CultureInfo.InvariantCulture, x)
 
 type DateTime with
     static member FromUnixToLocal (timestamp:int64) =
@@ -123,30 +123,30 @@ type DateTime with
         let start = DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
         start.AddSeconds(float (timestamp / 1000L))
 
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         DateTime.TryParse(x, provider, style) |> toOption
 
     static member TryParse x =
-        DateTime.TryParseWithOptions DateTimeStyles.None CultureInfo.InvariantCulture x
+        DateTime.TryParseWithOptions (DateTimeStyles.None, CultureInfo.InvariantCulture, x)
 
-    static member TryParseExactWithOptions style provider (formats: string[]) x =
+    static member TryParseExactWithOptions (style, provider, (formats: string[]), (x : string)) =
         System.DateTime.TryParseExact(x, formats, provider, style) |> toOption
 
     static member tryParseExact formats x =
-        DateTime.TryParseExactWithOptions DateTimeStyles.None CultureInfo.InvariantCulture formats x
+        DateTime.TryParseExactWithOptions (DateTimeStyles.None, CultureInfo.InvariantCulture, formats, x)
 
 type DateTimeOffset with
-    static member TryParseWithOptions style provider x =
+    static member TryParseWithOptions (style, provider, (x : string)) =
         DateTimeOffset.TryParse(x, provider, style) |> toOption
 
     static member TryParse x =
-        DateTimeOffset.TryParseWithOptions DateTimeStyles.None CultureInfo.InvariantCulture x
+        DateTimeOffset.TryParseWithOptions (DateTimeStyles.None, CultureInfo.InvariantCulture, x)
 
-    static member TryParseExactWithOptions style provider (formats: string[]) x =
+    static member TryParseExactWithOptions (style, provider, (formats: string[]), (x : string)) =
         DateTimeOffset.TryParseExact(x, formats, provider, style) |> toOption
 
     static member tryParseExact formats x =
-        DateTimeOffset.TryParseExactWithOptions DateTimeStyles.None CultureInfo.InvariantCulture formats x
+        DateTimeOffset.TryParseExactWithOptions (DateTimeStyles.None, CultureInfo.InvariantCulture, formats, x)
 
 type IDictionary<'Key, 'Value> with
     member inline this.TryFind(key) =
